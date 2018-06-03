@@ -20,7 +20,7 @@ USER webuser
 WORKDIR /home/webuser
 
 # Copy web applications
-COPY --chown=webuser html /home/webuser/html
+COPY html /home/webuser/html
 
 USER root
 ENTRYPOINT service nginx start && service uwsgi start && bash
