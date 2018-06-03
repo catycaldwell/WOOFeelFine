@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import random
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+#from flask.ext.api import status
 
 application = Flask(__name__)
 
@@ -22,11 +23,16 @@ quotes = [
     Quote("I feel loved...", "loved")
 ]
 
-@application.route("/quote")
+@application.route("/quote", methods=['GET', 'POST'])
 def quote():
-    return jsonify(
-        random.choice(quotes).serialize()
-    );
+    if request.method == "GET":
+        return jsonify(
+            random.choice(quotes).serialize()
+        )
+    elif request.method == "POST":
+        return None, 404
+
+    return None, 405
 
 if __name__ == "__main__":
     application.run(host='0.0.0.0')
