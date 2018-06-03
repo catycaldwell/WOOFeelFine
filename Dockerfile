@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Nathan Grubb
+MAINTAINER Caty Caldwell
 
 RUN apt update -y && apt upgrade -y
 RUN apt install -y systemd python3 python3-pip nginx
