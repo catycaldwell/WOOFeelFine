@@ -10,7 +10,7 @@ COPY init.d/uwsgi /etc/init.d/
 RUN chmod +x /etc/init.d/uwsgi
 
 COPY nginx /etc/nginx
-#COPY vassals/* /etc/uwsgi/vassals/
+COPY vassals/* /etc/uwsgi/vassals/
 
 CMD service nginx start
 
@@ -20,7 +20,8 @@ USER webuser
 WORKDIR /home/webuser
 
 # Copy web applications
-COPY html /home/webuser/html
+COPY --chown=webuser html /home/webuser/html
+COPY --chown=webuser quote /home/webuser/quote
 
 USER root
 ENTRYPOINT service nginx start && service uwsgi start && bash
